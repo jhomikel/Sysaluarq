@@ -18,7 +18,19 @@ public class ConnBD {
     private String us;
     private String psw;
 
+    /**
+     * @autor edgardo
+     * @
+     */
     public ConnBD() {
+        this.url = "jdbc://localhost:3306/AluarqBD";
+        this.driver = "com.mysql.Jdbc.driver";
+        this.us = "root";
+        this.psw = "eg98003";
+    }
+    
+    public void prueba() throws Exception{
+        
     }
 
     public String getUrl() {
