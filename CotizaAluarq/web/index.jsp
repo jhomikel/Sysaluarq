@@ -22,6 +22,9 @@ and open the template in the editor.
                         Nombre:
                         <input type="text" name="nombre">
                         
+                        Apellido:
+                        <input type="text" name="apellido">
+                        
                     </form>
                 </center>
             </div>
