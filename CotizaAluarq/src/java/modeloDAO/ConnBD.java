@@ -23,6 +23,13 @@ public class ConnBD {
           connection = null;  
     }
     
+    /**
+     * @autor Jhomikel
+     * @version 1.0
+     * @exception SQLExcetion para detectar un error en la conexión a la base de datos
+     * @exception ClassNotFoundException para verificar que error en el driver
+     * @exception Exception para verificar otro tipo de error.
+     */
     public void conectar(){
         try {
             Class.forName("com.mysql.jdbc.Driver");

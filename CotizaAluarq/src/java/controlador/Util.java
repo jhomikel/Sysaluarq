@@ -4,15 +4,12 @@
  * and open the template in the editor.
  */
 
-package logs;
-
-import java.util.logging.Logger;
+package controlador;
 
 /**
  *
  * @author PCVirtual
  */
-public class Gestionlogs {
-    private static final Logger LOG = Logger.getLogger(Gestionlogs.class.getName());
+public class Util {
     
 }
