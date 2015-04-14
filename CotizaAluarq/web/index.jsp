@@ -6,11 +6,24 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>ALUARQ Sa de CV</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="imagenes/icono-gestion.png" type="image/ico" />
+        <link rel="stylesheet" href="estilo.css" type="text/css" />
     </head>
     <body>
-        <div>TODO write content</div>
+        <div id="Contenedor">
+            <div id="Logo">
+            </div>           
+            <div id="Cuerpo">
+                <center>
+                    
+                </center>
+            </div>
+            <div id="Footer">
+                Derechos reservados &copy; - <small>ALU-ARQ, S.A. de C.V.</small>
+            </div>
+        </div>
     </body>
 </html>
