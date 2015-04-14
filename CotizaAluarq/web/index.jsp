@@ -18,7 +18,11 @@ and open the template in the editor.
             </div>           
             <div id="Cuerpo">
                 <center>
-                    
+                    <form>
+                        Nombre:
+                        <input type="text" name="nombre">
+                        
+                    </form>
                 </center>
             </div>
             <div id="Footer">
