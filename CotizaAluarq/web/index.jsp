@@ -11,7 +11,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="imagenes/icono-gestion.png" type="image/ico" />
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
-        <link href="css/style.css" rel="stylesheet">
+        <link href="estilo.css" rel="stylesheet">
 
         <link href="bootstrap/css/style1.css" rel="stylesheet">
 
@@ -21,43 +21,48 @@ and open the template in the editor.
         <!-- Custom styles for this template -->
         <link href="bootstrap/css/navbar-fixed-top.css" rel="stylesheet">
 
-         <!-- Custom styles for this template -->
+        <!-- Custom styles for this template -->
         <link href="bootstrap/css/signin.css" rel="stylesheet">
         <link rel="stylesheet" href="estilo.css" type="text/css" />
     </head>
+    <%
+        if (request.getAttribute("msj") != null) {
+            out.print("<script languaje=javascript>alert('" + request.getAttribute("msj") + "')</script>");
+        }
+    %>
     <body>
         <div class="container">
-        <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <div class="account-wall">
-                <div id="my-tab-content" class="tab-content">
-            <div class="tab-pane active" id="login">
-                      <img class="profile-img" src="imagenes/Logo.jpg" alt="">
-                    <form class="form-signin" role="form" data-toggle="validator" name="" action="" method="POST">
-                      <p>
-                        <input type="text" class="form-control" placeholder="Correo" name="correo" required autofocus>
-                      </p>
-                      <p>
-                        <input type="password" class="form-control" placeholder="Contraseña" name="pass" required>
-                        
-                      </select>
-                      <br>
-                      <input type="submit" class="btn btn-lg btn-primary btn-block" name="login" id="login" value="Login" />
-                    </form>    
-            </div>
-          </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-md-offset-4">
+                    <div class="account-wall">
+                        <div id="my-tab-content" class="tab-content">
+                            <div class="tab-pane active" id="login">
+                                <img class="profile-img" src="imagenes/Logo.jpg" alt="">
+                                <form class="form-signin" role="form" data-toggle="validator" name="frmLogin" action="EmpleadoCTRL" method="POST">
+                                    <p>
+                                        <input type="text" name="txtCorreo" class="form-control" placeholder="Correo" required autofocus>
+                                    </p>
+                                    <p>
+                                        <input type="password" name="txtPassword" class="form-control" placeholder="Contraseña" required>
+
+                                        </select>
+                                        <br>
+                                        <input type="submit" name="btnLogin" class="btn btn-lg btn-primary btn-block" name="login" id="login" value="Login" />
+                                </form>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-        
+
         <footer>
             <div class="navbar navbar-inverse navbar-fixed-bottom">
                 <h5>Derechos reservados &copy; - <small>ALU-ARQ, S.A. de C.V.</small></h5>
             </div>                 
         </footer>
-        
+
         <script src="bootstrap/js/bootstrap.js">
         <script src="bootstrapjs/jquery.min.js"></script>
         <script src="bootstrapjs/bootstrap.min.js"></script>

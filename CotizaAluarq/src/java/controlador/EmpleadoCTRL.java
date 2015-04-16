@@ -8,10 +8,12 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modeloDAO.EmpleadoDAO;
 
 /**
  *
@@ -33,15 +35,24 @@ public class EmpleadoCTRL extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EmpleadoCTRL</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EmpleadoCTRL at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            EmpleadoDAO edao = new EmpleadoDAO();
+            RequestDispatcher rd = null;
+            String url = null;
+            try {
+                if(request.getParameter("btnLogin")!=null){
+                    String us = request.getParameter("txtCorreo");
+                    String psw = request.getParameter("txtPassword");
+                    if(edao.validarUs(us, psw)){
+                        response.sendRedirect("vendedores/v_principal.jsp");
+                    } else {
+                        request.setAttribute("msj", "Usuario o contraseña incorrectos");
+                        url = "index.jsp";
+                        rd = request.getRequestDispatcher(url);
+                    }                    
+                }                
+                rd.forward(request, response);
+            } catch (Exception e) {               
+            }           
         }
     }
 

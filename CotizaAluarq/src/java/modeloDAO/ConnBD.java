@@ -9,6 +9,7 @@ package modeloDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,10 +18,11 @@ import java.sql.SQLException;
  * Clase para gestionar la conexión de la base de datos.
  */
 public class ConnBD {
-    Connection connection;
+    private static final Logger LOG = Logger.getLogger(ConnBD.class.getName());
+    private Connection connection;
    
     public ConnBD() {
-          connection = null;  
+          connection = null;
     }
     
     /**
@@ -37,16 +39,30 @@ public class ConnBD {
                     "jdbc:mysql://localhost:3306/aluarqbd", 
                     "root", 
                     "eg98003");
+            LOG.info("Se ha creado exitosamente la conexión a la Base de Datos");
         } catch (SQLException e) {
-            
+            LOG.severe(e.toString());
         } catch (ClassNotFoundException e){
-            
+            LOG.severe(e.toString());
         } catch (Exception e){
-            
+            LOG.severe(e.toString());
         }
     }
     
     public void desconectar(){
-        connection = null;
+        try {
+            connection.close();
+        } catch (Exception e) {
+            LOG.severe(e.toString());
+        }
+        
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 }
