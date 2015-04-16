@@ -27,6 +27,12 @@
         <link href="../bootstrap/css/signin.css" rel="stylesheet">
         <link rel="stylesheet" href="estilo.css" type="text/css" />
     </head>
+    <%!
+    String usr;   
+    %>
+    <%
+    usr = (String)session.getAttribute("username");
+    %>
     <body>
         <div class="container">
             <div class="row">
@@ -35,6 +41,7 @@
                         <div id="my-tab-content" class="tab-content">
                             <div class="tab-pane active" id="login">
                                 <!--Código aquí -->
+                                <h1>Bienvenido <%= usr %></h1>
                             </div>
                         </div>
                     </div>

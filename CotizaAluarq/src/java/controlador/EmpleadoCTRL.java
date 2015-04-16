@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modeloDAO.EmpleadoDAO;
 
 /**
@@ -38,11 +39,13 @@ public class EmpleadoCTRL extends HttpServlet {
             EmpleadoDAO edao = new EmpleadoDAO();
             RequestDispatcher rd = null;
             String url = null;
+            HttpSession session = request.getSession(false);
             try {
                 if(request.getParameter("btnLogin")!=null){
                     String us = request.getParameter("txtCorreo");
                     String psw = request.getParameter("txtPassword");
                     if(edao.validarUs(us, psw)){
+                        session.setAttribute("username", edao.getEmpleado().getCorreo());
                         response.sendRedirect("vendedores/v_principal.jsp");
                     } else {
                         request.setAttribute("msj", "Usuario o contraseña incorrectos");
