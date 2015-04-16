@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author PCVirtual
+ * @see AuthFilter Clase que es implementada para autenticar y autorizar via requestdispatcher una sesiòn
  */
 
 @WebFilter(filterName = "AuthFilter", urlPatterns = {"*.jsp"})
@@ -35,6 +36,14 @@ public class AuthFilter implements Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
+    /**
+     * 
+     * @param request solicitud del servlet
+     * @param response respuesta del servlet
+     * @param chain autorización
+     * @throws IOException Solicita el manejo de una Excepción de EntradaSalida IO.
+     * @throws ServletException  Solicita el manejo de una Excepción del Servlet
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
