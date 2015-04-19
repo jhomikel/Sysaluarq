@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modeloDAO.EmpleadoDAO;
+import uml.Empleado;
 
 /**
  *
@@ -46,7 +47,7 @@ public class EmpleadoCTRL extends HttpServlet {
                     String psw = request.getParameter("txtPassword");
                     if(edao.validarUs(us, psw)){
                         session.setAttribute("username", edao.getEmpleado().getCorreo());
-                        response.sendRedirect("vendedores/v_principal.jsp");
+                        response.sendRedirect("administrador/gestion_emp.jsp");
                     } else {
                         request.setAttribute("msj", "Usuario o contraseña incorrectos");
                         url = "index.jsp";
@@ -55,7 +56,47 @@ public class EmpleadoCTRL extends HttpServlet {
                 }                
                 rd.forward(request, response);
             } catch (Exception e) {               
-            }           
+            }
+            
+            /***
+             * @autor Angel vargas 
+             * @version 1.0
+             */
+            try {
+                if(request.getParameter("insertar")!= null){
+                    Empleado e = new Empleado();
+                    String resp = null;
+                    e.setIdEmpleado(Integer.parseInt(request.getParameter("id")));
+                    e.setNombres(request.getParameter("nombres"));
+                    e.setApellidos(request.getParameter("apellidos"));
+                    e.setCorreo(request.getParameter("correo"));
+                    e.setContrasenya(request.getParameter("contra"));
+                    e.setRol(request.getParameter("rol"));
+                    resp = edao.insertar(e);
+                    response.setHeader("resp", resp);
+                    response.sendRedirect("administrador/gestion_emp.jsp");     
+                }else if(request.getParameter("modificar")!=null){
+                     Empleado em = new Empleado();
+                    String resp = null;
+                    em.setIdEmpleado(Integer.parseInt(request.getParameter("txtID")));
+                    em.setNombres(request.getParameter("nombres"));
+                    em.setApellidos(request.getParameter("apellidos"));
+                    em.setCorreo(request.getParameter("correo"));
+                    em.setContrasenya(request.getParameter("contra"));
+                    em.setRol(request.getParameter("rol"));
+                    resp = edao.actualizar(em);
+                    response.setHeader("resp", resp);
+                    response.sendRedirect("administrador/gestion_emp.jsp"); 
+                }else if(request.getParameter("eliminar")!= null){
+                     Empleado em = new Empleado();
+                     String resp = null;
+                     em.setIdEmpleado(Integer.parseInt(request.getParameter("txtID")));
+                     resp = edao.eliminar(em);
+                     response.setHeader("resp", resp);
+                     response.sendRedirect("administrador/gestion_emp.jsp"); 
+                }
+            } catch (Exception e) {
+            }
         }
     }
 

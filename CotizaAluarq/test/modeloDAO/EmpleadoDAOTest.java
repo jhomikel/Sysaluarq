@@ -8,6 +8,7 @@ package modeloDAO;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+import uml.Empleado;
 
 /**
  *
@@ -27,5 +28,23 @@ public class EmpleadoDAOTest {
             System.out.println("Usuario o contraseña incorrectos");
         }
     }
-    
+    /***
+     * @autor Angel Vargas
+     */
+    @Test
+    public void testInsert() {
+        EmpleadoDAO edao = new EmpleadoDAO();
+        Empleado em = new Empleado();
+        try {
+            em.setIdEmpleado(4);
+            em.setNombres("Angel Vargas");
+            em.setApellidos("Vargas Hernandez");
+            em.setCorreo("vargas080994@gmail.com");
+            em.setContrasenya("aluarq123");
+            em.setRol("vendedor");
+            String msj = edao.insertar(em);
+            System.out.println(msj);
+        } catch (Exception e) {
+        }
+    }
 }

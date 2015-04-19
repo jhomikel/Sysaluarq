@@ -36,7 +36,7 @@ public class ConnBD {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/aluarqbd", 
+                    "jdbc:mysql://localhost:3306/AluarqBD", 
                     "root", 
                     "eg98003");
             LOG.info("Se ha creado exitosamente la conexión a la Base de Datos");

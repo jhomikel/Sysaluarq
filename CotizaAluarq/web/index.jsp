@@ -64,7 +64,7 @@ and open the template in the editor.
         </footer>
 
         <script src="bootstrap/js/bootstrap.js">
-        <script src="bootstrapjs/jquery.min.js"></script>
-        <script src="bootstrapjs/bootstrap.min.js"></script>
+        <script src="bootstrap/js/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>
