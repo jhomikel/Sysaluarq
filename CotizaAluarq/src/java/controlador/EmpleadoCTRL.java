@@ -47,7 +47,11 @@ public class EmpleadoCTRL extends HttpServlet {
                     String psw = request.getParameter("txtPassword");
                     if(edao.validarUs(us, psw)){
                         session.setAttribute("username", edao.getEmpleado().getCorreo());
-                        response.sendRedirect("administrador/gestion_emp.jsp");
+                        if (edao.getEmpleado().getRol().equals("vendedor") || edao.getEmpleado().getRol().equals("Vendedor")) {
+                            response.sendRedirect("vendedores/v_principal.jsp");
+                        }else{
+                            response.sendRedirect("administrador/gestion_emp.jsp");
+                        }
                     } else {
                         request.setAttribute("msj", "Usuario o contraseña incorrectos");
                         url = "index.jsp";
