@@ -44,7 +44,7 @@ public class OfertaDAO implements OperacionesBD{
             while (rs.next()) {
                 lst.add(new Oferta(
                         rs.getString("numCotizacion"),
-                        rs.getInt("idCliente"),
+                        /*rs.getInt("idCliente"),*/
                         rs.getInt("idEmpleado"),
                         rs.getDate("fecha"),
                         rs.getString("proyecto"),
