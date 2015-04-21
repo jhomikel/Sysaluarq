@@ -27,7 +27,8 @@ and open the template in the editor.
     </head>
     <%
         if (request.getAttribute("msj") != null) {
-            out.print("<script languaje=javascript>alert('" + request.getAttribute("msj") + "')</script>");
+            //out.print("<script languaje=javascript>alert('" + request.getAttribute("msj") + "')</script>");
+            out.print("<div class='alert alert-warning alert-dismissable'>" + "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>¡Cuidado!</strong> " + request.getAttribute("msj") + "</div>");
         }
     %>
     <body>
@@ -63,7 +64,7 @@ and open the template in the editor.
             </div>                 
         </footer>
 
-        <script src="bootstrap/js/bootstrap.js">
+        <script src="bootstrap/js/bootstrap.js"></script>
         <script src="bootstrap/js/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
     </body>

@@ -1,11 +1,13 @@
 <%-- 
-    Document   : gestion_emp
-    Created on : 04-18-2015, 10:48:47 PM
-    Author     : Angel
+    Document   : e_principal
+    Created on : 04-17-2015, 03:53:36 PM
+    Author     : Luis Melendez
 --%>
+
+<%@page import="uml.Cliente"%>
 <%@page import="java.util.List"%>
-<%@page import="uml.Empleado"%>
-<%@page import="modeloDAO.EmpleadoDAO"%>
+<%@page import="modeloDAO.ClienteDAO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -63,13 +65,14 @@
                   }
         </script>
         <script>
-            function cargar(id, nom, ape, correo, contra, rol){
+            function cargar(id, nom, aten, dire, tel, movil, correo){
                 document.frmDatos.txtID.value = id;
-                document.frmDatos.nombres.value = nom;
-                document.frmDatos.apellidos.value = ape;
-                document.frmDatos.correo.value = correo;
-                document.frmDatos.contra.value = contra;
-                document.frmDatos.rol.value = rol;
+                document.frmDatos.txtnombre.value = nom;
+                document.frmDatos.txtaten.value = aten;
+                document.frmDatos.txtdire.value = dire;
+                document.frmDatos.txttel.value = tel;
+                document.frmDatos.txtmovil.value = movil;
+                document.frmDatos.txtcorreo.value = correo
                 }
         </script>    
         <style type="text/css">
@@ -87,10 +90,11 @@
         </style>
   </head>
   <%
-      EmpleadoDAO edao = new EmpleadoDAO();
+      ClienteDAO cdao = new ClienteDAO();
   %>
   <body>
-    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <!-- ############# MENU PRINCIPAL ##############  -->
+      <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -103,21 +107,20 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse" bgcolor="black">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="gestion_emp.jsp">Empleados</a></li>
-            <li><a href="../empleado/gestion_clie.jsp">Clientes</a></li>
+              <li><a href="../administrador/gestion_emp.jsp">Empleados</a></li>
+              <li class="active"><a href="gestion_clie.jsp">Clientes</a></li>
           </ul>
-          <!--<form class="navbar-form navbar-right" role="form">
-            <?php echo "<a class='btn btn-default' disabled='disabled'>" .$_SESSION['rol']. "</a>"; ?>&nbsp;&nbsp;<a type="submit" class="btn btn-success" href="../php_mantenimiento/cerrar.php">Cerrar Sesi&oacute;n</a>
-          </form>-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <div class="container"> 
+      
+      <!-- ############# TABLA DE INFORMACION DEL CLIENTE ##############  -->
+      <div class="container">
     <br>
     <br>
     <br>
     <div class="panel panel-primary"> 
-    <div class="panel-heading"><h3 align="center">Empleados</h3></div>
+    <div class="panel-heading"><h3 align="center">Clientes</h3></div>
     <form class="navbar-form" role="search" style="text-align: right">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Buscar" id="searchTerm" onkeyup="doSearch()">
@@ -129,27 +132,29 @@
       <thead>
         <tr>
           <th style="text-align: center; width:200px ">ID </th>
-          <th style="text-align: center; width:300px ">Nombres</th>
-          <th style="text-align: center; width:300px">Apellidos</th>
+          <th style="text-align: center; width:300px ">Nombres Cliente</th>
+          <th style="text-align: center; width:300px">Atencion</th>
+          <th style="text-align: center; width:300px">Direccion</th>
+          <th style="text-align: center; width:300px">Telefono</th>
+          <th style="text-align: center; width:300px">Movil</th> 
           <th style="text-align: center; width:300px">Correo</th>
-          <th style="text-align: center; width:300px">Contrase&ntilde;a</th>
-          <th style="text-align: center; width:300px">Rol</th> 
           <th style="text-align: center; width:300px">Cargar</th>                    
         </tr>
       </thead>
       <tbody>
         <%
-            List<Empleado> lst = edao.consultar();
-            for(Empleado e : lst){
+            List<Cliente> lst = cdao.consultar();
+            for(Cliente cl : lst){
         %>  
               <tr>
-                  <td><%= e.getIdEmpleado() %></td>
-                  <td><%= e.getNombres() %></td>
-                  <td><%= e.getApellidos() %></td>
-                  <td><%= e.getCorreo() %></td>
-                  <td><%= e.getContrasenya() %></td>
-                  <td><%= e.getRol() %></td>
-                  <td><button type="button" onclick="cargar('<%= e.getIdEmpleado() %>', '<%= e.getNombres() %>', '<%= e.getApellidos() %>', '<%= e.getCorreo() %>', '<%= e.getContrasenya() %>', '<%= e.getRol() %>')" class="btn btn-lg btn-success" data-toggle="modal" data-target="#basicModal1">Actualizar</button></td>
+                  <td><%= cl.getIdCliente()%></td>
+                  <td><%= cl.getNombreCliente()%></td>
+                  <td><%= cl.getAtencion()%></td>
+                  <td><%= cl.getDireccion()%></td>
+                  <td><%= cl.getTelefon()%></td>
+                  <td><%= cl.getMovil()%></td>
+                  <td><%= cl.getCorreo()%></td>
+                  <td><button type="button" onclick="cargar('<%= cl.getIdCliente()%>', '<%= cl.getNombreCliente()%>', '<%= cl.getAtencion()%>', '<%= cl.getDireccion()%>', '<%= cl.getTelefon()%>', '<%= cl.getMovil()%>', '<%= cl.getCorreo()%>')" class="btn btn-lg btn-success" data-toggle="modal" data-target="#basicModal1">Actualizar</button></td>
               </tr>
       <%
             }
@@ -165,50 +170,56 @@
             </div>
          </div>
     </div>
-    <!--#################### POP UP PARA AGREAGAR EMPLEADOS ####################-->
+    <!--#################### POP UP PARA AGREAGAR CLIENTES ####################-->
     <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Insertar Empleado</h4>
+            <h4 class="modal-title" id="myModalLabel">Insertar Cliente</h4>
           </div>
           <div class="modal-body">
-              <form class="form-horizontal" data-toggle="validator" action="../EmpleadoCTRL" method="POST">
+              <form class="form-horizontal" data-toggle="validator" action="../ClienteCTRL" method="POST">
               <div class="form-group">
                   <label class="control-label col-xs-3">Id:</label>
                   <div class="col-xs-9">
-                      <input type="text" class="form-control" placeholder="Id Empleado" name="id" required>
+                      <input type="text" class="form-control" placeholder="Id Cliente" name="id" required>
                   </div>
               </div>
               <div class="form-group">
                   <label class="control-label col-xs-3">Nombres:</label>
                   <div class="col-xs-9">
-                      <input type="text" class="form-control" placeholder="Nombres" name="nombres" required>
+                      <input type="text" class="form-control" placeholder="Nombres" name="nombre" required>
                   </div>
               </div>
                <div class="form-group">
-                  <label class="control-label col-xs-3">Apellidos:</label>
+                  <label class="control-label col-xs-3">Atencion:</label>
                   <div class="col-xs-9">
-                      <input type="text" class="form-control" placeholder="Apellidos" name="apellidos" required>
+                      <input type="text" class="form-control" placeholder="Atencion" name="aten" required>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-xs-3">Direcci&oacute;n:</label>
+                  <div class="col-xs-9">
+                      <input type="text" class="form-control" placeholder="Direcci&oacute;n" name="dire" required>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-xs-3">Telefono:</label>
+                  <div class="col-xs-9">
+                      <input type="text" class="form-control"  placeholder="Telefono"  name="tel"  required>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-xs-3">Movil:</label>
+                  <div class="col-xs-9">
+                      <input type="text" class="form-control" placeholder="Movil" name="movil" required>
                   </div>
               </div>
               <div class="form-group">
                   <label class="control-label col-xs-3">Correo:</label>
                   <div class="col-xs-9">
                       <input type="text" class="form-control" placeholder="Correo" name="correo" required>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="control-label col-xs-3">Contrase&ntilde;a</label>
-                  <div class="col-xs-9">
-                      <input type="text" class="form-control"  placeholder="Contrase&ntilde;a"  name="contra"  required>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="control-label col-xs-3">Rol:</label>
-                  <div class="col-xs-9">
-                      <input type="text" class="form-control" placeholder="Rol" name="rol" required>
                   </div>
               </div>
               <br>
@@ -225,16 +236,16 @@
         </div>
       </div>
     </div>
-    <!--#################### POP UP PARA ACTUALIZAR EMPLEADOS ####################--> 
+    <!--#################### POP UP PARA ACTUALIZAR Y ELIMINAR CLIENTES ####################--> 
     <div class="modal fade" id="basicModal1" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Actualizar Empleado</h4>
+            <h4 class="modal-title" id="myModalLabel">Actualizar Cliente</h4>
           </div>
           <div class="modal-body">
-            <form class="form-horizontal" data-toggle="validator" name="frmDatos" action="../EmpleadoCTRL" method="POST">
+            <form class="form-horizontal" data-toggle="validator" name="frmDatos" action="../ClienteCTRL" method="POST">
               <div class="form-group">
                   <label class="control-label col-xs-3">ID:</label>
                   <div class="col-xs-9">
@@ -244,31 +255,37 @@
               <div class="form-group">
                   <label class="control-label col-xs-3">Nombres:</label>
                   <div class="col-xs-9">
-                      <input type="text" class="form-control" placeholder="Nombres" id="nombres" name="nombres" required>
+                      <input type="text" class="form-control" placeholder="Nombres" name="txtnombre" required>
                   </div>
               </div>
                <div class="form-group">
-                  <label class="control-label col-xs-3">Apellidos:</label>
+                  <label class="control-label col-xs-3">Atencion:</label>
                   <div class="col-xs-9">
-                      <input type="text" class="form-control" placeholder="Apellidos" id="apellidos" name="apellidos" required>
+                      <input type="text" class="form-control" placeholder="Atencion" name="txtaten" required>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-xs-3">Direcci&oacute;n:</label>
+                  <div class="col-xs-9">
+                      <input type="text" class="form-control" placeholder="Direcci&oacute;n" name="txtdire" required>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-xs-3">Telefono:</label>
+                  <div class="col-xs-9">
+                      <input type="text" class="form-control"  placeholder="Telefono"  name="txttel"  required>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-xs-3">Movil:</label>
+                  <div class="col-xs-9">
+                      <input type="text" class="form-control" placeholder="Movil" name="txtmovil" required>
                   </div>
               </div>
               <div class="form-group">
                   <label class="control-label col-xs-3">Correo:</label>
                   <div class="col-xs-9">
-                      <input type="text" class="form-control" placeholder="Correo" id="correo" name="correo" required>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="control-label col-xs-3">Contrase&ntilde;a</label>
-                  <div class="col-xs-9">
-                      <input type="text" class="form-control" placeholder="Contrase&ntilde;" id="contra" name="contra" required>
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="control-label col-xs-3">Rol:</label>
-                  <div class="col-xs-9">
-                      <input type="text" class="form-control" placeholder="Rol" id="rol" name="rol" required>
+                      <input type="text" class="form-control" placeholder="Correo" name="txtcorreo" required>
                   </div>
               </div>
               <br>
