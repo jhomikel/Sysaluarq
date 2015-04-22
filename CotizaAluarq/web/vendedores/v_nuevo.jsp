@@ -29,10 +29,13 @@
          <!-- Custom styles for this template -->
         <link href="../bootstrap/css/signin.css" rel="stylesheet">
         <link rel="stylesheet" href="estilo.css" type="text/css" />
-        <link rel="stylesheet" href="../bootstrap/datepicker/css/bootstrap-datepicker.css" type="text/css" />
-        <script type="text/javascript" src="../bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" src="../bootstrap/js/jquery.min.js"></script>
-        <script src="../bootstrap/js/bootstrap.min.js"></script>
+        
+        <!-- Archivos para Datepicker-->
+        <link rel="stylesheet" href="../bootstrap/css/datepicker.css">
+        <script src="../bootstrap/js/jquery-1.11.2.min.js"></script>
+        <script src="../bootstrap/js/bootstrap-datepicker.js"></script>
+        
+        
 
         <!-- Script to Activate the Carousel -->
         <script>
@@ -61,6 +64,9 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
+                    <a class="navbar-brand" href="#" style="margin-top:-15px;">
+                        <img alt="Brand" width="45" height="45" src="../imagenes/navbar-logo.png">
+                    </a>
                     <div class="navbar-brand">Ofertas ALUARQ</div>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -110,11 +116,21 @@
                                     </select>
                                   </div>
                                 </div>
-                                   
+                                
+                                <!--Script para Datepicker-->
+                                <script>
+                                    $(function(){
+                                         $('.fecha').datepicker({
+                                                minDate: 0   
+                                            });    
+                                    });
+                                </script>
+                                <!--///Script para Datepicker-->
                                 <div class="form-group">
                                   <label class="col-md-4 control-label" for="num">Fecha</label>  
                                   <div class="col-md-4">
-                                    <input id="fecha" name="fecha" type="date" placeholder="" class="form-control input-md" required="">
+                                      <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+                                    <input id="fecha" name="fecha" type="text" placeholder="" class="form-control fecha" required="">
                                   </div>
                                 </div>
                                 
