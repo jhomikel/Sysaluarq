@@ -29,6 +29,12 @@ public class Oferta {
     public Oferta() {
     }
 
+    public Oferta(String numCotizacion) {
+        this.numCotizacion = numCotizacion;
+    }
+    
+    
+
     public Oferta(String numCotizacion, Cliente idCliente, Empleado idEmpleado, Date fecha, String proyecto, String condicionPago, String validez, double factorGanancia, int enProceso, int terminada, int aprobada, int enviada) {
         this.numCotizacion = numCotizacion;
         this.idCliente = idCliente;
