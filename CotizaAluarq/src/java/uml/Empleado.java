@@ -21,6 +21,12 @@ public class Empleado {
     public Empleado() {
     }
 
+    public Empleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
+
+        
+    
     public Empleado(int idEmpleado, String nombres, String apellidos, String correo, String contrasenya, String rol) {
         this.idEmpleado = idEmpleado;
         this.nombres = nombres;

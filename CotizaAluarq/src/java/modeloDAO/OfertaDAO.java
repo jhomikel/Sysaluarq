@@ -8,6 +8,8 @@ package modeloDAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import uml.Cliente;
+import uml.Empleado;
 import uml.Oferta;
 
 /**
@@ -42,10 +44,12 @@ public class OfertaDAO implements OperacionesBD{
             pst = bd.getConnection().prepareCall(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
+                Empleado e = new Empleado(rs.getInt("idEmpleado"));
+                Cliente c = new Cliente(rs.getInt("idCliente"));
                 lst.add(new Oferta(
                         rs.getString("numCotizacion"),
-                        rs.getInt("idCliente"),
-                        rs.getInt("idEmpleado"),
+                        c,
+                        e,
                         rs.getDate("fecha"),
                         rs.getString("proyecto"),
                         rs.getString("condicionPago"),
@@ -56,6 +60,9 @@ public class OfertaDAO implements OperacionesBD{
                         rs.getInt("aprobada"),
                         rs.getInt("enviada")
                 ));
+            pst.close();
+            rs.close();
+            bd.desconectar();
             }
         } catch (Exception e) {
             e.printStackTrace();
