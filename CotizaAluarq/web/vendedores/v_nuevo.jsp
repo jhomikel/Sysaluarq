@@ -120,7 +120,7 @@
                                 <!--Script para Datepicker-->
                                 <script>
                                     $(function(){
-                                         $('.fecha').datepicker({
+                                         $('.datepick').datepicker({
                                                 minDate: 0   
                                             });    
                                     });
@@ -130,7 +130,7 @@
                                   <label class="col-md-4 control-label" for="num">Fecha</label>  
                                   <div class="col-md-4">
                                       <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
-                                    <input id="fecha" name="fecha" type="text" placeholder="" class="form-control fecha" required="">
+                                    <input id="fecha" name="fecha" type="text" placeholder="" class="form-control datepick" required="">
                                   </div>
                                 </div>
                                 
