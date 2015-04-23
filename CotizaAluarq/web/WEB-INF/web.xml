@@ -8,6 +8,10 @@
         <servlet-name>ClienteCTRL</servlet-name>
         <servlet-class>controlador.ClienteCTRL</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OfertaCTRL</servlet-name>
+        <servlet-class>controlador.OfertaCTRL</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>EmpleadoCTRL</servlet-name>
         <url-pattern>/EmpleadoCTRL</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ClienteCTRL</servlet-name>
         <url-pattern>/ClienteCTRL</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OfertaCTRL</servlet-name>
+        <url-pattern>/OfertaCTRL</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

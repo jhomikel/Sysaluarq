@@ -47,6 +47,9 @@ public class EmpleadoCTRL extends HttpServlet {
                     String psw = request.getParameter("txtPassword");
                     if(edao.validarUs(us, psw)){
                         session.setAttribute("username", edao.getEmpleado().getCorreo());
+                        session.setAttribute("nombres", edao.getEmpleado().getNombres());
+                        session.setAttribute("apellidos", edao.getEmpleado().getApellidos());
+                        session.setAttribute("id", edao.getEmpleado().getIdEmpleado());
                         if (edao.getEmpleado().getRol().equals("vendedor") || edao.getEmpleado().getRol().equals("Vendedor")) {
                             response.sendRedirect("vendedores/v_principal.jsp");
                         }else{

@@ -5,9 +5,12 @@
  */
 package modeloDAO;
 
-import java.sql.*;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import uml.Cliente;
 import uml.Empleado;
 import uml.Oferta;
@@ -18,9 +21,36 @@ import uml.Oferta;
  */
 public class OfertaDAO implements OperacionesBD{
     ConnBD bd = new ConnBD();
+    PreparedStatement pst;
+    ResultSet rs;
+    private static final Logger LOG = Logger.getLogger(OfertaDAO.class.getName());
     @Override
     public String insertar(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String resp = "";
+        String sql = "INSERT INTO Oferta VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Oferta o = (Oferta) obj;
+        try {
+            bd.conectar();
+            pst = bd.getConnection().prepareCall(sql);
+            pst.setString(1, o.getNumCotizacion());
+            pst.setInt(2, o.getIdCliente().getIdCliente());
+            pst.setInt(3, o.getIdEmpleado().getIdEmpleado());
+            pst.setDate(4, new java.sql.Date(o.getFecha().getTime()));
+            pst.setString(5, o.getProyecto());
+            pst.setString(6, o.getCondicionPago());
+            pst.setString(7, o.getValidez());
+            pst.setDouble(8, o.getFactorGanancia());
+            pst.setInt(9, o.getEnProceso());
+            pst.setInt(10, o.getTerminada());
+            pst.setInt(11, o.getAprobada());
+            pst.setInt(12, o.getEnviada());
+            resp = String.valueOf(pst.executeUpdate())+ " registro insertado";
+            pst.close();
+            bd.desconectar();
+        } catch (Exception e) {
+            LOG.severe(e.toString());
+        }
+        return resp;
     }
 
     @Override

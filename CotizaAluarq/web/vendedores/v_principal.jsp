@@ -49,80 +49,89 @@
             }
         </style>
     </head>
+    <%
+        if (request.getAttribute("msj") != null) {
+            out.print("<script languaje=javascript>alert('" + request.getAttribute("msj") + "')</script>");
+        }
+    %>
     <%!
-    String usr;   
+    String usr, name, ape;
+    int id;
     %>
     <%
     usr = (String)session.getAttribute("username");
+    name = (String)session.getAttribute("nombres");
+    ape = (String)session.getAttribute("apellidos");
+    id = (Integer) session.getAttribute("id");
     %>
-        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#" style="margin-top:-15px;">
-                        <img alt="Brand" width="45" height="45" src="../imagenes/navbar-logo.png">
-                    </a>
-                    <div class="navbar-brand">Ofertas ALUARQ</div>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                      <li class="active"><a href="#"></a></li>
-                      <li><a href="#"></a></li>
-                      <li><a href="#"></a></li>
-                      <li><a href="#"></a></li>
-                      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        
     <body>
         <div class="container">
             <div class="row">
                     <div class="account-wall">
-                        <div id="my-tab-content" class="tab-content">
-                            <!-- Elementos del tab-->
-                            <ul class="nav nav-pills nav-tabs nav-justified">
-                                <li class="active"><a href="#nuevo"  data-toggle="tab"><span class="glyphicon glyphicon-plus"></span>&nbsp;Nueva Oferta</a></li>
-                                <li><a href="#proceso"  data-toggle="tab"><span class="glyphicon glyphicon-transfer"></span>&nbsp;En Proceso</a></li>
-                                <li><a href="#terminada"  data-toggle="tab"><span class="glyphicon glyphicon-saved"></span>&nbsp;Terminadas</a></li>
-                                <li><a href="#aprobada"  data-toggle="tab"><span class="glyphicon glyphicon-ok"></span>&nbsp;Aprobadas</a></li>
-                            </ul>
-                            
-                            <!-- DIV Contenedor de elementos tab-->
-                            <style>
-                                .nav-pane{
-                       
-                                    position: absolute;
-                                    
-                                }
+                        <style>
+                            .account-wall{
+                                margin-top: 70px;
+                                margin-bottom: 50px;
+                            }
+                            .nav-tabs {
+                                border: none;
+                            }
+                            li a{
+                                color: #CACACA;
+                            }
+                            .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+                                color: #55595E; 
+                                background-color: #E7E7E7; 
+                              }
+                            .col-md-4 {
+                              margin: 1px 15px;
+                            }
+                        </style>
+                            <div class="bs-example">
+                                <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+                                    <div class="container-fluid">
+                                        <div class="navbar-header">
+                                            <a class="navbar-brand" href="#" style="margin-top:-15px;">
+                                                <img alt="Brand" width="45" height="45" src="../imagenes/navbar-logo.png">
+                                            </a>
+                                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                              </button>
+                                            <div class="navbar-brand">Ofertas ALUARQ</div>
+                                        </div>
+                                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                        <ul class="nav nav-tabs navbar-right navbar-nav">
+                                            <li class="active"><a data-toggle="tab" href="#nuevaOferta">Nueva oferta</a></li>
+                                            <li><a data-toggle="tab" href="#enProceso">Ofertas en proceso</a></li>
+                                            <li class="dropdown">
+                                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Mas... <b class="caret"></b></a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a data-toggle="tab" href="#terminadas">Ofertas terminadas</a></li>
+                                                    <li><a data-toggle="tab" href="#aprobadas">Ofertas aprobadas</a></li>
+                                                    <li><a data-toggle="tab" href="">Cerrar sesi&oacute;n</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul></div>
+                                    </div>
+                                </nav>
                                 
-                                .account-wall{
-                                    height: 700px;
-                                }
-                                
-                                
-                            </style>
-                            <div class="tab-content">
-                                
-                                <!-- Contenedor para nueva Oferta-->
-                                <div class="nav-pane fade in active" id="nuevo">
-                                    
-                                    <form class="form-horizontal">
+                                <div class="tab-content">
+                                    <div id="nuevaOferta" class="tab-pane fade in active">
+                                        <form class="form-horizontal" action="${pageContext.request.contextPath}/OfertaCTRL" method='POST'>
                                         <fieldset>
 
                                         <!-- Form Name -->
                                         <legend><h3>Nueva oferta</h3></legend>
-
+                                        <input id='emp' name='emp' type='text' value="<%= id %>" hidden="true">
                                         <!-- Text input-->
                                         <div class="form-group">
                                           <label class="col-md-4 control-label" for="num">Cotizacion #</label>  
                                           <div class="col-md-4">
-                                            <input id="num" name="num" type="text" placeholder="" class="form-control input-md" required="">
+                                            <input id="num" name="num" type="text" placeholder="" class="form-control input-md" required>
 
                                             </div>
                                           </div>
@@ -147,8 +156,8 @@
                                           <!--Script para Datepicker-->
                                     <script>
                                         $(function(){
-                                             $('.fecha').datepicker({
-                                                    minDate: 0   
+                                             $('#fecha').datepicker({
+                                                    minDate: 0
                                                 });    
                                         });
                                     </script>
@@ -157,7 +166,7 @@
                                       <label class="col-md-4 control-label" for="num">Fecha</label>  
                                       <div class="col-md-4">
                                           <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
-                                        <input id="fecha" name="fecha" type="text" placeholder="" class="form-control fecha" required="">
+                                        <input id="fecha" name="fecha" type="text" placeholder="" class="form-control fecha" required="" readonly>
                                       </div>
                                     </div>
 
@@ -205,24 +214,21 @@
 
                                           </fieldset>
                                     </form>
+                                    </div>
+                                    <div id="enProceso" class="tab-pane fade">
+                                        <h3>Section B</h3>
+                                        <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
+                                    </div>
+                                    <div id="terminadas" class="tab-pane fade">
+                                        <h3>Dropdown 1</h3>
+                                        <p>WInteger convallis, nulla in sollicitudin placerat, ligula enim auctor lectus, in mollis diam dolor at lorem. Sed bibendum nibh sit amet dictum feugiat. Vivamus arcu sem, cursus a feugiat ut, iaculis at erat. Donec vehicula at ligula vitae venenatis. Sed nunc nulla, vehicula non porttitor in, pharetra et dolor. Fusce nec velit velit. Pellentesque consectetur eros.</p>
+                                    </div>
+                                    <div id="aprobadas" class="tab-pane fade">
+                                        <h3>Dropdown 2</h3>
+                                        <p>Donec vel placerat quam, ut euismod risus. Sed a mi suscipit, elementum sem a, hendrerit velit. Donec at erat magna. Sed dignissim orci nec eleifend egestas. Donec eget mi consequat massa vestibulum laoreet. Mauris et ultrices nulla, malesuada volutpat ante. Fusce ut orci lorem. Donec molestie libero in tempus imperdiet. Cum sociis natoque penatibus et magnis.</p>
+                                    </div>
                                 </div>
-                                    
-                                          <div class="nav-pane fade" id="proceso">
-                                              <div class="container">
-                                                  <h1>En Proceso</h1>
-                                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat nobis quod aut consequatur ducimus culpa quas quae minima sequi necessitatibus libero similique at maiores facilis, velit aliquam fuga ratione vel.</p>
-                                              </div>
-                                          </div>
-                                          <div class="nav-pane fade" id="terminada">
-                                              <h1>Terminadas</h1>
-                                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat nobis quod aut consequatur ducimus culpa quas quae minima sequi necessitatibus libero similique at maiores facilis, velit aliquam fuga ratione vel.</p>
-                                              </div>
-                                          <div class="nav-pane fade" id="aprobada">
-                                              <h1>Aprobadas</h1>
-                                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat nobis quod aut consequatur ducimus culpa quas quae minima sequi necessitatibus libero similique at maiores facilis, velit aliquam fuga ratione vel.</p>
-                                              </div>
                             </div>
-                        </div>
                     </div>   
             </div>
         </div>
