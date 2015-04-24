@@ -45,9 +45,14 @@ public class OfertaDAOTest {
     
     @Test
     public void testConsultar() {
-        List<Oferta> lst = odao.consultar();
-        for (Oferta o : lst) {
-            System.out.println(o.getNumCotizacion());
+        try{
+            List<Oferta> lst = odao.consultarTipo("enProceso");
+            for (Oferta o : lst) {
+                System.out.println(o.getNumCotizacion());
+            }
+            System.out.println(lst.size());
+        }catch(Exception ex){
+            ex.printStackTrace();
         }
     }
 }

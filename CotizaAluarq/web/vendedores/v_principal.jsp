@@ -4,6 +4,8 @@
     Author     : PCVirtual
 --%>
 
+<%@page import="uml.Oferta"%>
+<%@page import="modeloDAO.OfertaDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="uml.Cliente"%>
 <%@page import="modeloDAO.ClienteDAO"%>
@@ -63,6 +65,7 @@
     name = (String)session.getAttribute("nombres");
     ape = (String)session.getAttribute("apellidos");
     id = (Integer) session.getAttribute("id");
+    OfertaDAO odao = new OfertaDAO();
     %>
         
     <body>
@@ -86,6 +89,10 @@
                               }
                             .col-md-4 {
                               margin: 1px 15px;
+                            }
+                            table{
+                                text-align: left;
+                                background-color: rgb(237, 237, 237);
                             }
                         </style>
                             <div class="bs-example">
@@ -166,7 +173,7 @@
                                       <label class="col-md-4 control-label" for="num">Fecha</label>  
                                       <div class="col-md-4">
                                           <div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
-                                        <input id="fecha" name="fecha" type="text" placeholder="" class="form-control fecha" required="" readonly>
+                                        <input id="fecha" name="fecha" type="text" placeholder="" class="form-control fecha" style="background-color: white;" required="" readonly>
                                       </div>
                                     </div>
 
@@ -215,17 +222,134 @@
                                           </fieldset>
                                     </form>
                                     </div>
-                                    <div id="enProceso" class="tab-pane fade">
-                                        <h3>Section B</h3>
-                                        <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
+                                    <div id="enProceso" class="tab-pane fade" style="padding: 0px 20px 0px 20px;">
+                                        <%
+                                            List<Oferta> lstProc = odao.consultarTipo("enProceso");
+                                            if (lstProc.size() < 1) {
+                                        %> 
+                                        <h1>No hay ofertas en proceso actualmente.</h1>
+                                        <hr>
+                                        <a data-toggle="tab" href="#nuevaOferta" class="btn btn-success">Crear nueva oferta</a>
+                                        <%        
+                                            }else{
+                                        %>
+                                        <h2>Ofertas en proceso</h2>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Cliente</th>
+                                                        <th>Fecha</th>
+                                                        <th>Proyecto</th>
+                                                        <th>Empleado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% 
+                                                    
+                                                    for (Oferta o: lstProc) {
+                                                        %>
+                                                        <tr>
+                                                            <td><%= o.getNumCotizacion() %></td>
+                                                            <td><%= o.getIdCliente().getNombreCliente() %></td>
+                                                            <td><%= o.getFecha() %></td>
+                                                            <td><%= o.getProyecto() %></td>
+                                                            <td><%= o.getIdEmpleado().getNombres() %></td>
+                                                        </tr>
+                                                        <%
+                                                    }
+                                                %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <% } %>
                                     </div>
                                     <div id="terminadas" class="tab-pane fade">
-                                        <h3>Dropdown 1</h3>
-                                        <p>WInteger convallis, nulla in sollicitudin placerat, ligula enim auctor lectus, in mollis diam dolor at lorem. Sed bibendum nibh sit amet dictum feugiat. Vivamus arcu sem, cursus a feugiat ut, iaculis at erat. Donec vehicula at ligula vitae venenatis. Sed nunc nulla, vehicula non porttitor in, pharetra et dolor. Fusce nec velit velit. Pellentesque consectetur eros.</p>
+                                        <%
+                                            List<Oferta> lstTer = odao.consultarTipo("Terminada");
+                                            if (lstTer.size() < 1) {
+                                        %> 
+                                        <h1>No hay ofertas terminadas actualmente.</h1>
+                                        <hr>
+                                        <a data-toggle="tab" href="#nuevaOferta" class="btn btn-success">Crear nueva oferta</a>
+                                        <%        
+                                            }else{
+                                        %>
+                                        <h2>Ofertas terminadas</h2>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Cliente</th>
+                                                        <th>Fecha</th>
+                                                        <th>Proyecto</th>
+                                                        <th>Empleado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% 
+                                                    
+                                                    for (Oferta o: lstProc) {
+                                                        %>
+                                                        <tr>
+                                                            <td><%= o.getNumCotizacion() %></td>
+                                                            <td><%= o.getIdCliente().getNombreCliente() %></td>
+                                                            <td><%= o.getFecha() %></td>
+                                                            <td><%= o.getProyecto() %></td>
+                                                            <td><%= o.getIdEmpleado().getNombres() %></td>
+                                                        </tr>
+                                                        <%
+                                                    }
+                                                %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <% } %>
                                     </div>
                                     <div id="aprobadas" class="tab-pane fade">
-                                        <h3>Dropdown 2</h3>
-                                        <p>Donec vel placerat quam, ut euismod risus. Sed a mi suscipit, elementum sem a, hendrerit velit. Donec at erat magna. Sed dignissim orci nec eleifend egestas. Donec eget mi consequat massa vestibulum laoreet. Mauris et ultrices nulla, malesuada volutpat ante. Fusce ut orci lorem. Donec molestie libero in tempus imperdiet. Cum sociis natoque penatibus et magnis.</p>
+                                        <%
+                                            List<Oferta> lstApro = odao.consultarTipo("Aprobada");
+                                            if (lstTer.size() < 1) {
+                                        %> 
+                                        <h1>No hay ofertas aprobadas actualmente.</h1>
+                                        <hr>
+                                        <a data-toggle="tab" href="#nuevaOferta" class="btn btn-success">Crear nueva oferta</a>
+                                        <%        
+                                            }else{
+                                        %>
+                                        <h2>Ofertas aprobadas</h2>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Cliente</th>
+                                                        <th>Fecha</th>
+                                                        <th>Proyecto</th>
+                                                        <th>Empleado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <% 
+                                                    
+                                                    for (Oferta o: lstProc) {
+                                                        %>
+                                                        <tr>
+                                                            <td><%= o.getNumCotizacion() %></td>
+                                                            <td><%= o.getIdCliente().getNombreCliente() %></td>
+                                                            <td><%= o.getFecha() %></td>
+                                                            <td><%= o.getProyecto() %></td>
+                                                            <td><%= o.getIdEmpleado().getNombres() %></td>
+                                                        </tr>
+                                                        <%
+                                                    }
+                                                %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <% } %>
                                     </div>
                                 </div>
                             </div>

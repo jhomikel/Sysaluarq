@@ -65,37 +65,64 @@ public class OfertaDAO implements OperacionesBD{
 
     @Override
     public List<Oferta> consultar() {
-        PreparedStatement pst;
-        ResultSet rs;
-        String sql = "SELECT * FROM Oferta";
         List<Oferta> lst = new ArrayList();
+        String sql = "SELECT * FROM Oferta";
         try {
             bd.conectar();
-            pst = bd.getConnection().prepareCall(sql);
+            pst = bd.getConnection().prepareStatement(sql);
             rs = pst.executeQuery();
             while (rs.next()) {
-                Empleado e = new Empleado(rs.getInt("idEmpleado"));
-                Cliente c = new Cliente(rs.getInt("idCliente"));
                 lst.add(new Oferta(
-                        rs.getString("numCotizacion"),
-                        c,
-                        e,
-                        rs.getDate("fecha"),
-                        rs.getString("proyecto"),
-                        rs.getString("condicionPago"),
-                        rs.getString("validez"),
+                        rs.getString("numCotizacion"), 
+                        new Cliente(rs.getInt("idCliente")),
+                        new Empleado(rs.getInt("idEmpleado")), 
+                        rs.getDate("fecha"), 
+                        rs.getString("proyecto"), 
+                        rs.getString("condicionPago"), 
+                        rs.getString("validez"), 
                         rs.getDouble("factorGanancia"),
                         rs.getInt("enProceso"),
                         rs.getInt("terminada"),
                         rs.getInt("aprobada"),
-                        rs.getInt("enviada")
-                ));
+                        rs.getInt("enviada")));
+            }
             pst.close();
             rs.close();
             bd.desconectar();
-            }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.severe(e.toString());
+        }
+        return lst;
+    }
+    
+    public List<Oferta> consultarTipo(String tipo) {
+        String sql = "SELECT o.numCotizacion as Cotizacion, c.nombreCliente as Cliente, e.nombres as Empleado, o.fecha,  o.proyecto, o.condicionPago, o.validez, o.factorGanancia\n" +
+        "FROM oferta o JOIN cliente c\n" +
+        "ON o.idCliente = c.idCliente\n" +
+        "JOIN empleado e\n" +
+        "ON o.idEmpleado = e.idEmpleado\n" +
+        "where o."+tipo+" = 1 ";
+        List<Oferta> lst = new ArrayList();
+        try {
+            bd.conectar();
+            pst = bd.getConnection().prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                lst.add(new Oferta(
+                        rs.getString("Cotizacion"), 
+                        new Cliente(rs.getString("Cliente")),
+                        new Empleado(rs.getString("Empleado")), 
+                        rs.getDate("fecha"), 
+                        rs.getString("proyecto"), 
+                        rs.getString("condicionPago"), 
+                        rs.getString("validez"), 
+                        rs.getDouble("factorGanancia")));
+            }
+            pst.close();
+            rs.close();
+            bd.desconectar();
+        } catch (Exception e) {
+            LOG.severe(e.toString());
         }
         return lst;
     }
