@@ -37,7 +37,9 @@
         <script src="../bootstrap/js/jquery-1.11.2.min.js"></script>
         <script src="../bootstrap/js/bootstrap-datepicker.js"></script>
         
-        
+        <!-- Progres Bar -->
+        <link href="../bootstrap/css/pace.css" rel="stylesheet">
+        <script src="../bootstrap/js/pace.min.js"></script>
 
         <!-- Script to Activate the Carousel -->
         <script>
@@ -69,6 +71,7 @@
     %>
         
     <body>
+        <div class="pace"></div>
         <div class="container">
             <div class="row">
                     <div class="account-wall">

@@ -24,6 +24,10 @@ and open the template in the editor.
         <!-- Custom styles for this template -->
         <link href="bootstrap/css/signin.css" rel="stylesheet">
         <link rel="stylesheet" href="estilo.css" type="text/css" />
+        
+        <!-- Progres Bar -->
+        <link href="bootstrap/css/pace.css" rel="stylesheet">
+        <script src="bootstrap/js/pace.min.js"></script>
     </head>
     <%
         if (request.getAttribute("msj") != null) {
@@ -32,6 +36,7 @@ and open the template in the editor.
         }
     %>
     <body>
+        <div class="pace"></div>
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -39,17 +44,24 @@ and open the template in the editor.
                         <div id="my-tab-content" class="tab-content">
                             <div class="tab-pane active" id="login">
                                 <img class="profile-img" src="imagenes/Logo.jpg" alt="">
-                                <form class="form-signin" role="form" data-toggle="validator" name="frmLogin" action="EmpleadoCTRL" method="POST">
-                                    <p>
-                                        <input type="text" name="txtCorreo" class="form-control" placeholder="Correo" required autofocus>
-                                    </p>
-                                    <p>
-                                        <input type="password" name="txtPassword" class="form-control" placeholder="Contraseña" required>
+                                    <div class="contenedor"><br>
+                                        <form class="form-group" role="form" data-toggle="validator" name="frmLogin" action="EmpleadoCTRL" method="POST">
+                                            <div class="input-group">
+                                                <span class="input-group-addon glyphicon glyphicon-user" ></span>
+                                                <input type="text" name="txtCorreo" class="form-control" placeholder="Correo" required autofocus>
+                                            </div>
+                                            <br>
 
-                                        </select>
-                                        <br>
-                                        <input type="submit" name="btnLogin" class="btn btn-lg btn-primary btn-block" name="login" id="login" value="Login" />
-                                </form>  
+                                            <div class="input-group">
+                                                <span class="input-group-addon glyphicon glyphicon-lock" ></span>
+                                                <input  type="password" name="txtPassword" class="form-control" placeholder="Contraseña" required>
+                                            </div>
+                                            <br>
+                                            <input type="submit" name="btnLogin" class="btn btn-lg btn-primary btn-block" name="login" id="login" value="Iniciar Sesión" />
+
+                                        </form>
+                                    </div>
+                                  </div>
                             </div>
                         </div>
                     </div>

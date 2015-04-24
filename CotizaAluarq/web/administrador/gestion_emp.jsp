@@ -27,6 +27,10 @@
         <!-- Custom styles for this template -->
         <link href="../bootstrap/css/signin.css" rel="stylesheet">
         <link rel="stylesheet" href="../estilo.css" type="text/css">
+        
+        <!-- Progres Bar -->
+        <link href="../bootstrap/css/pace.css" rel="stylesheet">
+        <script src="../bootstrap/js/pace.min.js"></script>
         <script type="text/javascript">
           function doSearch()
                   {
@@ -90,9 +94,13 @@
       EmpleadoDAO edao = new EmpleadoDAO();
   %>
   <body>
+      <div class="contenedor"></div>
     <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
       <div class="container">
         <div class="navbar-header">
+            <a class="navbar-brand" href="#" style="margin-top:-15px;">
+                <img alt="Brand" width="45" height="45" src="../imagenes/navbar-logo.png">
+            </a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -165,6 +173,7 @@
             </div>
          </div>
     </div>
+      <br>
     <!--#################### POP UP PARA AGREAGAR EMPLEADOS ####################-->
     <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
       <div class="modal-dialog">
@@ -286,10 +295,10 @@
       </div>
     </div>
     <footer>
-        <div class="navbar navbar-inverse navbar-fixed-bottom">
-            <h5>Derechos reservados &copy; - <small>ALU-ARQ, S.A. de C.V.</small></h5>
-       </div>                 
-    </footer>
+            <div style="color:white;" class="navbar navbar-inverse navbar-fixed-bottom">
+                <h5>Derechos reservados &copy; - <small>ALU-ARQ, S.A. de C.V.</small></h5>
+            </div>                 
+        </footer>
         <script src="../bootstrap/js/bootstrap.js"></script>
         <script src="../bootstrap/js/jquery.min.js"></script>
         <script src="../sbootstrap/js/bootstrap.min.js"></script>
